@@ -1,0 +1,148 @@
+linux基础命令使用
+
+01 命令格式
+$ ls -l /home
+命令提示符 命令字 命令选项 命令参数
+
+02 获得命令帮助
+$ help pwd
+$ touch --help
+$ man ls
+$ info ls
+
+03 文件和目录操作
+* 目录操作命令
+	ls pwd cd mkdir rmdir
+* 文件操作命令
+	file touch cp rm mv find
+* 文本文件查看命令
+	cat more less head tail
+		
+04 文件系统操作
+  mount umount fdisk mkfs du df fsck
+  
+  Fg:
+  mount /dev/hdb1 /mnt/usb
+  umount /mnt/usb
+  
+  BTW:
+  自动挂载配置文件：/etc/fstab
+  
+05 用户和用户组管理
+*  用户管理命令
+   adduser passwd userdel usermod
+   
+   Fg:
+   adduser st01
+   passwd st01
+   usermod -L st01
+   userdel -r st01 
+
+*  用户组管理命令
+	 groupadd groupdel
+	 
+	 Fg:
+	 groupadd class1
+	 adduser -g class1 st03
+	 usermod -g class1 st03
+	 groupdel class1
+	 
+06 文件权限管理
+	 chown chgrp chmod
+	 
+	 chown [owner][:[group]] file ...
+
+07 文件的压缩 tar
+
+建立归档
+
+* 对文件和目录进行归档
+	tar cf myfiles.tar files/
+	BTW: c表示建立归档 f用于指定建立归档文件名
+* 对文件和目录进行压缩归档
+	tar czf myfiles.tar.gz files/
+	BTW: z表示对归档进行压缩
+	
+查看归档中的文件列表
+	
+* 查看归档文件中的目录列表
+	tar tf myfiles.tar
+* 查看压缩归档文件中的目录列表
+	tar tzf myfiles.tar.gz
+	BTW:t表示查看归档
+	
+恢复归档文件
+
+* 恢复归档文件
+	tar xf myfiles.tar
+* 恢复压缩的归档文件
+	tar xzf myfiles.tar.gz
+* 恢复归档文件到指定目录
+	tar xzf myfiles.tar.gz -C restore/
+	
+	BTW:
+	x表示恢复归档，-C指定归档恢复的目标目录
+	
+08 软件包的安装与管理
+	
+RPM 查询命令
+
+* 查询Linux系统中的所有软件包
+	rpm -qa
+* 查询指定名称的软件包是否安装
+	rpm -q 包名称
+* 查询指定名称的软件包的详细信息
+	rpm -qi 包名称
+* 查询指定名称的软件包中所包括的文件列表
+	rpm -ql 包名称
+* 查询指定文件所属的软件包
+	rpm -qf 文件
+* 查询指定RPM包文件的详细信息
+	rpm -qpi 包文件名
+* 查询指定RPM包中包括的文件列表
+	rpm -qpl 包文件名
+	
+	Fg:
+	rpm -qi bash
+	rpm -qpl bash-xx-i386.rpm
+	
+RPM安装命令	
+
+* -i 选项表示安装软件包
+	rpm -i vim-common-xxx.i386.rpm
+	
+	BTW:
+	-ivh 会显示更多的提示信息
+	
+RPM包卸载
+rpm -e 软件包名称
+
+RPM包升级
+rpm -U 软件包名称
+
+
+09 进程管理
+
+* 相关命令
+	pstree	通过树形结构显示进程间的继承关系
+	ps			显示当前系统中进程运行情况
+	kill
+	sleep
+	bg
+	fg
+	shutdown/init 0 关闭系统
+
+10 Bash中相关技巧
+	Bash中多用tab命令补全功能
+	Ctrl+u 和 Ctrl+k分别表示删除当前贯标到行首和行尾的内容
+	history用于查看历史命令
+	hictory -c清除历史命令
+	通过alias命令简化命令
+	Ctrl-r: to search backward in the history for a particular string.  
+	Ctrl-s: search forward through the history.But the problem with Ctrl-s
+is that sometimes collides with XON/XOFF flow control.
+	so do this: stty -ixon in the .bash_profile	
+
+11 其它常用命令
+	iconv -f "gb2312" -t "utf-8" < linux_fundamentals > linux_fundamentals.txt
+	
