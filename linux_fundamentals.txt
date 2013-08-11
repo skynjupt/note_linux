@@ -142,6 +142,9 @@ rpm -U 软件包名称
 	Ctrl-s: search forward through the history.But the problem with Ctrl-s
 is that sometimes collides with XON/XOFF flow control.
 	so do this: stty -ixon in the .bash_profile	
+	Ctrl-w:删除最后一个单词
+	Alt-.:打印上一次命令的最后一个单词
+	Alt-*:列出可以输入的命令
 
 11 其它常用命令
 	iconv -f "gb2312" -t "utf-8" < linux_fundamentals > linux_fundamentals.txt
